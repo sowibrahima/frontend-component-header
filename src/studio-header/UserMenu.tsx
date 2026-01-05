@@ -10,6 +10,7 @@ import getUserMenuItems from './utils';
 const UserMenu = ({
   username,
   studioBaseUrl,
+  lmsBaseUrl,
   logoutUrl,
   authenticatedUserAvatar,
   isMobile,
@@ -40,6 +41,7 @@ const UserMenu = ({
       id="user-dropdown-menu"
       items={getUserMenuItems({
         studioBaseUrl,
+        lmsBaseUrl,
         logoutUrl,
         intl,
         isAdmin,
@@ -51,6 +53,7 @@ const UserMenu = ({
 UserMenu.propTypes = {
   username: PropTypes.string,
   studioBaseUrl: PropTypes.string.isRequired,
+  lmsBaseUrl: PropTypes.string.isRequired,
   logoutUrl: PropTypes.string.isRequired,
   authenticatedUserAvatar: PropTypes.string,
   isMobile: PropTypes.bool,

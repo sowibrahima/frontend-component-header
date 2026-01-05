@@ -9,6 +9,7 @@ import HeaderBody from './HeaderBody';
 
 ensureConfig([
   'STUDIO_BASE_URL',
+  'LMS_BASE_URL',
   'SITE_NAME',
   'LOGOUT_URL',
   'LOGIN_URL',
@@ -32,6 +33,7 @@ const StudioHeader = ({
     isAdmin: authenticatedUser?.administrator,
     authenticatedUserAvatar: authenticatedUser?.avatar,
     studioBaseUrl: isNewHomePage ? '/home' : config.STUDIO_BASE_URL,
+    lmsBaseUrl: config.LMS_BASE_URL,
     logoutUrl: config.LOGOUT_URL,
     isHiddenMainMenu,
     mainMenuDropdowns,

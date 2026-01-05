@@ -28,6 +28,7 @@ const HeaderBody = ({
   username,
   isAdmin,
   studioBaseUrl,
+  lmsBaseUrl,
   logoutUrl,
   authenticatedUserAvatar,
   isMobile,
@@ -132,6 +133,7 @@ const HeaderBody = ({
             {...{
               username,
               studioBaseUrl,
+              lmsBaseUrl,
               logoutUrl,
               authenticatedUserAvatar,
               isAdmin,

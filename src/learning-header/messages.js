@@ -26,6 +26,11 @@ const messages = defineMessages({
     defaultMessage: 'Order History',
     description: 'The text for the user menu Order History navigation link.',
   },
+  studioHome: {
+    id: 'header.user.menu.studio.home',
+    defaultMessage: 'Studio Home',
+    description: 'The text for the user menu Studio navigation link (for users with authoring access).',
+  },
   skipNavLink: {
     id: 'header.navigation.skipNavLink',
     defaultMessage: 'Skip to main content.',

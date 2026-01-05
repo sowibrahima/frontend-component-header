@@ -6,6 +6,11 @@ const messages = defineMessages({
     defaultMessage: 'Studio Home',
     description: 'Link to Studio Home',
   },
+  'header.user.menu.dashboard': {
+    id: 'header.user.menu.dashboard',
+    defaultMessage: 'Learner Dashboard',
+    description: 'Link back to the learner dashboard',
+  },
   'header.user.menu.maintenance': {
     id: 'header.user.menu.maintenance',
     defaultMessage: 'Maintenance',
