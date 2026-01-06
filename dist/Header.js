@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot';
 import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
 import messages from './Header.messages';
-ensureConfig(['LMS_BASE_URL', 'LOGOUT_URL', 'LOGIN_URL', 'SITE_NAME', 'LOGO_URL', 'ORDER_HISTORY_URL'], 'Header component');
+ensureConfig(['LMS_BASE_URL', 'LOGOUT_URL', 'LOGIN_URL', 'SITE_NAME', 'LOGO_URL', 'ORDER_HISTORY_URL', 'STUDIO_BASE_URL'], 'Header component');
 subscribe(APP_CONFIG_INITIALIZED, function () {
   mergeConfig({
     AUTHN_MINIMAL_HEADER: !!process.env.AUTHN_MINIMAL_HEADER
@@ -51,6 +51,10 @@ var Header = function Header(_ref) {
   var defaultUserMenu = authenticatedUser === null ? [] : [{
     heading: '',
     items: [{
+      type: 'item',
+      href: getConfig().STUDIO_BASE_URL,
+      content: intl.formatMessage(messages['header.user.menu.studio.home'])
+    }, {
       type: 'item',
       href: "".concat(config.LMS_BASE_URL, "/dashboard"),
       content: intl.formatMessage(messages['header.user.menu.dashboard'])

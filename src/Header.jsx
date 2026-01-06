@@ -23,6 +23,7 @@ ensureConfig([
   'SITE_NAME',
   'LOGO_URL',
   'ORDER_HISTORY_URL',
+  'STUDIO_BASE_URL',
 ], 'Header component');
 
 subscribe(APP_CONFIG_INITIALIZED, () => {
@@ -61,6 +62,11 @@ const Header = ({
   const defaultUserMenu = authenticatedUser === null ? [] : [{
     heading: '',
     items: [
+      {
+        type: 'item',
+        href: getConfig().STUDIO_BASE_URL,
+        content: intl.formatMessage(messages['header.user.menu.studio.home']),
+      },
       {
         type: 'item',
         href: `${config.LMS_BASE_URL}/dashboard`,

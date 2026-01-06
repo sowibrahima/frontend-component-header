@@ -14,10 +14,6 @@ import messages from './messages';
 const AuthenticatedUserDropdown = ({ intl, username }) => {
   const dropdownItems = [
     {
-      message: intl.formatMessage(messages.studioHome),
-      href: getConfig().STUDIO_BASE_URL,
-    },
-    {
       message: intl.formatMessage(messages.dashboard),
       href: `${getConfig().LMS_BASE_URL}/dashboard`,
     },

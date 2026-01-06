@@ -17,9 +17,6 @@ var AuthenticatedUserDropdown = function AuthenticatedUserDropdown(_ref) {
   var intl = _ref.intl,
     username = _ref.username;
   var dropdownItems = [{
-    message: intl.formatMessage(messages.studioHome),
-    href: getConfig().STUDIO_BASE_URL
-  }, {
     message: intl.formatMessage(messages.dashboard),
     href: "".concat(getConfig().LMS_BASE_URL, "/dashboard")
   }, {
