@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import {
   APP_CONFIG_INITIALIZED,
@@ -48,9 +48,10 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
  * See the documentation for the structure of user menu item.
  */
 const Header = ({
-  intl, mainMenuItems, secondaryMenuItems, userMenuItems,
+  mainMenuItems, secondaryMenuItems, userMenuItems,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
+  const intl = useIntl();
 
   const defaultMainMenu = [
     {
@@ -98,7 +99,26 @@ const Header = ({
 
   const mainMenu = mainMenuItems || defaultMainMenu;
   const secondaryMenu = secondaryMenuItems || [];
-  const userMenu = authenticatedUser === null ? [] : userMenuItems || defaultUserMenu;
+
+  // WS_CUSTOM: Merge Studio URL into user menu if userMenuItems are provided
+  let userMenu = userMenuItems || defaultUserMenu;
+  if (userMenuItems && userMenuItems.length > 0) {
+    // Add Studio URL as the first item in the provided user menu
+    userMenu = [
+      {
+        heading: '',
+        items: [
+          {
+            type: 'item',
+            href: getConfig().STUDIO_BASE_URL,
+            content: intl.formatMessage(messages['header.user.menu.studio.home']),
+          },
+          ...userMenuItems[0].items,
+        ],
+      },
+      ...userMenuItems.slice(1),
+    ];
+  }
 
   const loggedOutItems = [
     {
@@ -145,7 +165,6 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-  intl: intlShape.isRequired,
   mainMenuItems: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.array,
@@ -165,4 +184,4 @@ Header.propTypes = {
   })),
 };
 
-export default injectIntl(Header);
+export default Header;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import {
   Avatar,
 } from '@openedx/paragon';
@@ -15,9 +15,8 @@ const UserMenu = ({
   authenticatedUserAvatar,
   isMobile,
   isAdmin,
-  // injected
-  intl,
 }) => {
+  const intl = useIntl();
   const avatar = authenticatedUserAvatar ? (
     <img
       className="d-block w-100 h-100"
@@ -58,8 +57,6 @@ UserMenu.propTypes = {
   authenticatedUserAvatar: PropTypes.string,
   isMobile: PropTypes.bool,
   isAdmin: PropTypes.bool,
-  // injected
-  intl: intlShape.isRequired,
 };
 
 UserMenu.defaultProps = {
@@ -69,4 +66,4 @@ UserMenu.defaultProps = {
   username: null,
 };
 
-export default injectIntl(UserMenu);
+export default UserMenu;

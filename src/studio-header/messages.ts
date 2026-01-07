@@ -8,13 +8,8 @@ const messages = defineMessages({
   },
   'header.user.menu.dashboard': {
     id: 'header.user.menu.dashboard',
-    defaultMessage: 'Learner Dashboard',
+    defaultMessage: 'Dashboard',
     description: 'Link back to the learner dashboard',
-  },
-  'header.user.menu.maintenance': {
-    id: 'header.user.menu.maintenance',
-    defaultMessage: 'Maintenance',
-    description: 'Link to the Studio maintenance page',
   },
   'header.user.menu.logout': {
     id: 'header.user.menu.logout',
