@@ -6,7 +6,7 @@ function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 import React, { useContext } from 'react';
 import Responsive from 'react-responsive';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import { APP_CONFIG_INITIALIZED, ensureConfig, mergeConfig, getConfig, subscribe } from '@edx/frontend-platform';
 import PropTypes from 'prop-types';
@@ -36,13 +36,13 @@ subscribe(APP_CONFIG_INITIALIZED, function () {
  * See the documentation for the structure of user menu item.
  */
 var Header = function Header(_ref) {
-  var intl = _ref.intl,
-    mainMenuItems = _ref.mainMenuItems,
+  var mainMenuItems = _ref.mainMenuItems,
     secondaryMenuItems = _ref.secondaryMenuItems,
     userMenuItems = _ref.userMenuItems;
   var _useContext = useContext(AppContext),
     authenticatedUser = _useContext.authenticatedUser,
     config = _useContext.config;
+  var intl = useIntl();
   var defaultMainMenu = [{
     type: 'item',
     href: "".concat(config.LMS_BASE_URL, "/dashboard"),
@@ -78,7 +78,20 @@ var Header = function Header(_ref) {
   }];
   var mainMenu = mainMenuItems || defaultMainMenu;
   var secondaryMenu = secondaryMenuItems || [];
-  var userMenu = authenticatedUser === null ? [] : userMenuItems || defaultUserMenu;
+
+  // WS_CUSTOM: Merge Studio URL into user menu if userMenuItems are provided
+  var userMenu = userMenuItems || defaultUserMenu;
+  if (userMenuItems && userMenuItems.length > 0) {
+    // Add Studio URL as the first item in the provided user menu
+    userMenu = [{
+      heading: '',
+      items: [{
+        type: 'item',
+        href: getConfig().STUDIO_BASE_URL,
+        content: intl.formatMessage(messages['header.user.menu.studio.home'])
+      }].concat(_toConsumableArray(userMenuItems[0].items))
+    }].concat(_toConsumableArray(userMenuItems.slice(1)));
+  }
   var loggedOutItems = [{
     type: 'item',
     href: config.LOGIN_URL,
@@ -116,7 +129,6 @@ Header.defaultProps = {
   userMenuItems: null
 };
 Header.propTypes = {
-  intl: intlShape.isRequired,
   mainMenuItems: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   secondaryMenuItems: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   userMenuItems: PropTypes.arrayOf(PropTypes.shape({
@@ -129,5 +141,5 @@ Header.propTypes = {
     }))
   }))
 };
-export default injectIntl(Header);
+export default Header;
 //# sourceMappingURL=Header.js.map

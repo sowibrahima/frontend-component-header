@@ -8,14 +8,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { getConfig } from '@edx/frontend-platform';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import { Dropdown } from '@openedx/paragon';
 import LearningUserMenuToggleSlot from '../plugin-slots/LearningUserMenuToggleSlot';
 import LearningUserMenuSlot from '../plugin-slots/LearningUserMenuSlot';
 import messages from './messages';
 var AuthenticatedUserDropdown = function AuthenticatedUserDropdown(_ref) {
-  var intl = _ref.intl,
-    username = _ref.username;
+  var username = _ref.username;
+  var intl = useIntl();
   var dropdownItems = [{
     message: intl.formatMessage(messages.dashboard),
     href: "".concat(getConfig().LMS_BASE_URL, "/dashboard")
@@ -47,8 +47,7 @@ var AuthenticatedUserDropdown = function AuthenticatedUserDropdown(_ref) {
   })));
 };
 AuthenticatedUserDropdown.propTypes = {
-  intl: intlShape.isRequired,
   username: PropTypes.string.isRequired
 };
-export default injectIntl(AuthenticatedUserDropdown);
+export default AuthenticatedUserDropdown;
 //# sourceMappingURL=AuthenticatedUserDropdown.js.map

@@ -1,11 +1,11 @@
 import React from 'react';
 import { getConfig } from '@edx/frontend-platform';
 import { getLoginRedirectUrl } from '@edx/frontend-platform/auth';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import LearningLoggedOutItemsSlot from '../plugin-slots/LearningLoggedOutItemsSlot';
 import genericMessages from '../generic/messages';
-var AnonymousUserMenu = function AnonymousUserMenu(_ref) {
-  var intl = _ref.intl;
+var AnonymousUserMenu = function AnonymousUserMenu() {
+  var intl = useIntl();
   var buttonsInfo = [{
     message: intl.formatMessage(genericMessages.registerSentenceCase),
     href: "".concat(getConfig().LMS_BASE_URL, "/register?next=").concat(encodeURIComponent(global.location.href))
@@ -18,8 +18,5 @@ var AnonymousUserMenu = function AnonymousUserMenu(_ref) {
     buttonsInfo: buttonsInfo
   });
 };
-AnonymousUserMenu.propTypes = {
-  intl: intlShape.isRequired
-};
-export default injectIntl(AnonymousUserMenu);
+export default AnonymousUserMenu;
 //# sourceMappingURL=AnonymousUserMenu.js.map

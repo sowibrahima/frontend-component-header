@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { getConfig } from '@edx/frontend-platform';
-import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import AnonymousUserMenu from './AnonymousUserMenu';
 import AuthenticatedUserDropdown from './AuthenticatedUserDropdown';
@@ -14,8 +14,8 @@ var LearningHeader = function LearningHeader(_ref) {
   var courseOrg = _ref.courseOrg,
     courseNumber = _ref.courseNumber,
     courseTitle = _ref.courseTitle,
-    intl = _ref.intl,
     showUserDropdown = _ref.showUserDropdown;
+  var intl = useIntl();
   var _useContext = useContext(AppContext),
     authenticatedUser = _useContext.authenticatedUser;
   var headerLogo = /*#__PURE__*/React.createElement(LogoSlot, {
@@ -47,7 +47,6 @@ LearningHeader.propTypes = {
   courseOrg: courseInfoDataShape.courseOrg,
   courseNumber: courseInfoDataShape.courseNumber,
   courseTitle: courseInfoDataShape.courseTitle,
-  intl: intlShape.isRequired,
   showUserDropdown: PropTypes.bool
 };
 LearningHeader.defaultProps = {
@@ -56,5 +55,5 @@ LearningHeader.defaultProps = {
   courseTitle: null,
   showUserDropdown: true
 };
-export default injectIntl(LearningHeader);
+export default LearningHeader;
 //# sourceMappingURL=LearningHeader.js.map
