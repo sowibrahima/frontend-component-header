@@ -2,7 +2,7 @@ import { defineMessages } from '@edx/frontend-platform/i18n';
 var messages = defineMessages({
   dashboard: {
     id: 'header.menu.dashboard.label',
-    defaultMessage: 'Dashboard',
+    defaultMessage: 'Tableau de bord',
     description: 'The text for the user menu Dashboard navigation link.'
   },
   help: {
@@ -12,22 +12,22 @@ var messages = defineMessages({
   },
   profile: {
     id: 'header.menu.profile.label',
-    defaultMessage: 'Profile',
+    defaultMessage: 'Profil',
     description: 'The text for the user menu Profile navigation link.'
   },
   account: {
     id: 'header.menu.account.label',
-    defaultMessage: 'Account',
+    defaultMessage: 'Compte',
     description: 'The text for the user menu Account navigation link.'
   },
   orderHistory: {
     id: 'header.menu.orderHistory.label',
-    defaultMessage: 'Order History',
+    defaultMessage: 'Historique des commandes',
     description: 'The text for the user menu Order History navigation link.'
   },
   studioHome: {
     id: 'header.user.menu.studio.home',
-    defaultMessage: 'Studio Home',
+    defaultMessage: 'Accueil Studio',
     description: 'The text for the user menu Studio navigation link (for users with authoring access).'
   },
   skipNavLink: {
@@ -37,7 +37,7 @@ var messages = defineMessages({
   },
   signOut: {
     id: 'header.menu.signOut.label',
-    defaultMessage: 'Sign Out',
+    defaultMessage: 'Déconnexion',
     description: 'The label for the user menu Sign Out action.'
   },
   userOptionsDropdownLabel: {

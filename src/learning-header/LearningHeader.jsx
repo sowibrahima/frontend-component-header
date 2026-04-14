@@ -12,6 +12,14 @@ import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
 import LearningHelpSlot from '../plugin-slots/LearningHelpSlot';
 
+const getDisplayName = (user) => {
+  if (!user) {
+    return null;
+  }
+
+  return user.name || user.username || null;
+};
+
 const LearningHeader = ({
   courseOrg,
   courseNumber,
@@ -30,23 +38,27 @@ const LearningHeader = ({
   );
 
   return (
-    <header className="learning-header">
-      <a className="sr-only sr-only-focusable" href="#main-content">{intl.formatMessage(messages.skipNavLink)}</a>
-      <div className="container-xl py-2 d-flex align-items-center">
+    <header className="learning-header bg-white border-b border-neutral-100">
+      <a className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-2 focus:bg-white focus:text-brand" href="#main-content">
+        {intl.formatMessage(messages.skipNavLink)}
+      </a>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center h-14">
         {headerLogo}
-        <div className="flex-grow-1 course-title-lockup d-flex" style={{ lineHeight: 1 }}>
+        <div className="flex-1 min-w-0 flex items-center" style={{ lineHeight: 1 }}>
           <CourseInfoSlot courseOrg={courseOrg} courseNumber={courseNumber} courseTitle={courseTitle} />
         </div>
         {showUserDropdown && authenticatedUser && (
-        <>
-          <LearningHelpSlot />
-          <AuthenticatedUserDropdown
-            username={authenticatedUser.username}
-          />
-        </>
+          <>
+            <LearningHelpSlot />
+            <AuthenticatedUserDropdown
+              username={getDisplayName(authenticatedUser)}
+              secondaryLabel={authenticatedUser.email || authenticatedUser.username}
+              avatar={authenticatedUser.avatar}
+            />
+          </>
         )}
         {showUserDropdown && !authenticatedUser && (
-        <AnonymousUserMenu />
+          <AnonymousUserMenu />
         )}
       </div>
     </header>

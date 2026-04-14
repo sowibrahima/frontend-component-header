@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@openedx/paragon';
 var LearningLoggedOutButtons = function LearningLoggedOutButtons(_ref) {
   var buttonsInfo = _ref.buttonsInfo;
   return buttonsInfo.map(function (buttonInfo) {
-    var _buttonInfo$variant;
-    return /*#__PURE__*/React.createElement(Button, {
-      className: "ml-3",
-      variant: (_buttonInfo$variant = buttonInfo.variant) !== null && _buttonInfo$variant !== void 0 ? _buttonInfo$variant : 'outline-primary',
-      href: buttonInfo.href
+    return /*#__PURE__*/React.createElement("a", {
+      key: buttonInfo.href,
+      href: buttonInfo.href,
+      className: buttonInfo.variant === 'primary' ? 'ml-3 text-sm font-semibold text-white bg-brand px-5 py-2 rounded-full hover:bg-brand/90 transition-colors' : 'ml-3 text-sm font-medium text-neutral-700 hover:text-neutral-900 transition-colors'
     }, buttonInfo.message);
   });
 };

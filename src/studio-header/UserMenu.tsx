@@ -13,7 +13,6 @@ const UserMenu = ({
   lmsBaseUrl,
   logoutUrl,
   authenticatedUserAvatar,
-  isMobile,
   isAdmin,
 }) => {
   const intl = useIntl();
@@ -32,11 +31,10 @@ const UserMenu = ({
       data-testid="avatar-icon"
     />
   );
-  const title = isMobile ? avatar : <>{avatar}{username}</>;
 
   return (
     <NavDropdownMenu
-      buttonTitle={title}
+      buttonTitle={avatar}
       id="user-dropdown-menu"
       items={getUserMenuItems({
         studioBaseUrl,

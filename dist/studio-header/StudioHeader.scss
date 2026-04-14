@@ -2,8 +2,9 @@ $spacer: 1rem;
 $white: #FFFFFF;
 
 .studio-header {
-  position: relative;
-  z-index: 1000;
+  position: sticky;
+  top: 0;
+  z-index: var(--wutiskill-header-z-index, 1100);
 
   height: 3.75rem;
   box-shadow: 0 1px 0 0 rgb(0 0 0 / .1);

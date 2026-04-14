@@ -7,6 +7,8 @@ import MobileUserMenuToggle, {
 const MobileUserMenuToggleSlot = ({
   avatar,
   label,
+  secondaryLabel,
+  variant,
 }) => (
   <PluginSlot
     id="org.openedx.frontend.layout.header_mobile_user_menu_trigger.v1"
@@ -14,7 +16,12 @@ const MobileUserMenuToggleSlot = ({
       mergeProps: true,
     }}
   >
-    <MobileUserMenuToggle avatar={avatar} label={label} />
+    <MobileUserMenuToggle
+      avatar={avatar}
+      label={label}
+      secondaryLabel={secondaryLabel}
+      variant={variant}
+    />
   </PluginSlot>
 );
 

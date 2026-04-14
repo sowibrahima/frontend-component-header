@@ -14,4 +14,12 @@ module.exports = createConfig('webpack-dev', {
       '@edx/frontend-component-header': path.resolve(__dirname, 'src'),
     },
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+    ],
+  },
 });

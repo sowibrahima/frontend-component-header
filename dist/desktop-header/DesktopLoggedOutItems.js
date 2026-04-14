@@ -5,7 +5,7 @@ var DesktopLoggedOutItems = function DesktopLoggedOutItems(_ref) {
   return items.map(function (item, i, arr) {
     return /*#__PURE__*/React.createElement("a", {
       key: "".concat(item.type, "-").concat(item.content),
-      className: i < arr.length - 1 ? 'btn mr-2 btn-link' : 'btn mr-2 btn-outline-primary',
+      className: i < arr.length - 1 ? 'text-sm font-medium text-neutral-700 hover:text-neutral-900 px-3 py-2 transition-colors' : 'text-sm font-semibold text-white bg-brand px-5 py-2 rounded-full hover:bg-brand/90 transition-colors',
       href: item.href
     }, item.content);
   });

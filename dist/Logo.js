@@ -11,12 +11,36 @@ var Logo = function Logo(_ref) {
     attributes = _objectWithoutProperties(_ref, _excluded);
   return /*#__PURE__*/React.createElement("a", _extends({
     href: href,
-    className: "logo"
-  }, attributes), /*#__PURE__*/React.createElement("img", {
-    className: "d-block",
-    src: src,
-    alt: alt
-  }));
+    className: "flex items-center shrink-0 mr-6 gap-2 no-underline"
+  }, attributes), /*#__PURE__*/React.createElement("span", {
+    style: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '32px',
+      height: '32px',
+      borderRadius: '8px',
+      backgroundColor: '#590D22',
+      flexShrink: 0
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#FFFFFF',
+      fontFamily: 'Inter, sans-serif',
+      fontWeight: 800,
+      fontSize: '16px',
+      lineHeight: 1,
+      letterSpacing: '-0.5px'
+    }
+  }, "W")), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontFamily: 'Inter, sans-serif',
+      fontWeight: 700,
+      fontSize: '15px',
+      color: '#111827',
+      letterSpacing: '-0.3px'
+    }
+  }, "WutiSkill"));
 };
 export var logoDataShape = {
   href: PropTypes.string.isRequired,

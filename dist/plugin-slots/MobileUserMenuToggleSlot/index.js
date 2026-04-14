@@ -3,7 +3,9 @@ import { PluginSlot } from '@openedx/frontend-plugin-framework';
 import MobileUserMenuToggle, { MobileUserMenuTogglePropTypes } from '../../mobile-header/MobileUserMenuToggle';
 var MobileUserMenuToggleSlot = function MobileUserMenuToggleSlot(_ref) {
   var avatar = _ref.avatar,
-    label = _ref.label;
+    label = _ref.label,
+    secondaryLabel = _ref.secondaryLabel,
+    variant = _ref.variant;
   return /*#__PURE__*/React.createElement(PluginSlot, {
     id: "org.openedx.frontend.layout.header_mobile_user_menu_trigger.v1",
     slotOptions: {
@@ -11,7 +13,9 @@ var MobileUserMenuToggleSlot = function MobileUserMenuToggleSlot(_ref) {
     }
   }, /*#__PURE__*/React.createElement(MobileUserMenuToggle, {
     avatar: avatar,
-    label: label
+    label: label,
+    secondaryLabel: secondaryLabel,
+    variant: variant
   }));
 };
 MobileUserMenuToggleSlot.propTypes = MobileUserMenuTogglePropTypes;

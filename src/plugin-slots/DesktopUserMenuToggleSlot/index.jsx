@@ -5,6 +5,8 @@ import DesktopUserMenuToggle, { DesktopUserMenuTogglePropTypes } from '../../des
 const DesktopUserMenuToggleSlot = ({
   avatar,
   label,
+  secondaryLabel,
+  variant,
 }) => (
   <PluginSlot
     id="org.openedx.frontend.layout.header_desktop_user_menu_toggle.v1"
@@ -12,7 +14,12 @@ const DesktopUserMenuToggleSlot = ({
       mergeProps: true,
     }}
   >
-    <DesktopUserMenuToggle avatar={avatar} label={label} />
+    <DesktopUserMenuToggle
+      avatar={avatar}
+      label={label}
+      secondaryLabel={secondaryLabel}
+      variant={variant}
+    />
   </PluginSlot>
 );
 

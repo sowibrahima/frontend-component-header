@@ -12,7 +12,8 @@ describe('Header', () => {
 
   it('displays user button', () => {
     render(<Header />);
-    expect(screen.getByText(authenticatedUser.username)).toBeInTheDocument();
+    expect(screen.getByLabelText('User Options')).toBeInTheDocument();
+    expect(screen.queryByText(authenticatedUser.username)).not.toBeInTheDocument();
   });
 
   it('displays course data', () => {

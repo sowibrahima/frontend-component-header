@@ -10,6 +10,7 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import { APP_CONFIG_INITIALIZED, ensureConfig, mergeConfig, getConfig, subscribe } from '@edx/frontend-platform';
 import PropTypes from 'prop-types';
+import { Dashboard, Home, Logout, PersonOutline, ReceiptLong, Settings } from '@openedx/paragon/icons';
 import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot';
 import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
 import messages from './Header.messages';
@@ -38,7 +39,11 @@ subscribe(APP_CONFIG_INITIALIZED, function () {
 var Header = function Header(_ref) {
   var mainMenuItems = _ref.mainMenuItems,
     secondaryMenuItems = _ref.secondaryMenuItems,
-    userMenuItems = _ref.userMenuItems;
+    userMenuItems = _ref.userMenuItems,
+    desktopBrandSupplement = _ref.desktopBrandSupplement,
+    logoDestination = _ref.logoDestination,
+    showStudioLinkInUserMenu = _ref.showStudioLinkInUserMenu,
+    userMenuVariant = _ref.userMenuVariant;
   var _useContext = useContext(AppContext),
     authenticatedUser = _useContext.authenticatedUser,
     config = _useContext.config;
@@ -46,34 +51,62 @@ var Header = function Header(_ref) {
   var defaultMainMenu = [{
     type: 'item',
     href: "".concat(config.LMS_BASE_URL, "/dashboard"),
-    content: intl.formatMessage(messages['header.links.courses'])
+    content: intl.formatMessage(messages['header.links.explore'])
+  }, {
+    type: 'item',
+    href: "".concat(config.LMS_BASE_URL, "/dashboard"),
+    content: intl.formatMessage(messages['header.links.my.courses'])
   }];
+
+  // Derive a readable display name: "First L." from full name, fallback to username
+  var getDisplayName = function getDisplayName(user) {
+    if (!user) {
+      return null;
+    }
+    var fullName = user.name || '';
+    var parts = fullName.trim().split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) {
+      return "".concat(parts[0], " ").concat(parts[parts.length - 1][0], ".");
+    }
+    if (parts.length === 1) {
+      return parts[0];
+    }
+    return user.username;
+  };
+  var studioHomeMenuItem = {
+    type: 'item',
+    href: getConfig().STUDIO_BASE_URL,
+    content: intl.formatMessage(messages['header.user.menu.studio.home']),
+    icon: Home
+  };
+  var dashboardMenuItem = {
+    type: 'item',
+    href: "".concat(config.LMS_BASE_URL, "/dashboard"),
+    content: intl.formatMessage(messages['header.user.menu.dashboard']),
+    icon: Dashboard
+  };
   var defaultUserMenu = authenticatedUser === null ? [] : [{
     heading: '',
-    items: [{
-      type: 'item',
-      href: getConfig().STUDIO_BASE_URL,
-      content: intl.formatMessage(messages['header.user.menu.studio.home'])
-    }, {
-      type: 'item',
-      href: "".concat(config.LMS_BASE_URL, "/dashboard"),
-      content: intl.formatMessage(messages['header.user.menu.dashboard'])
-    }, {
+    items: [].concat(_toConsumableArray(showStudioLinkInUserMenu ? [studioHomeMenuItem] : [dashboardMenuItem]), [{
       type: 'item',
       href: "".concat(config.ACCOUNT_PROFILE_URL, "/u/").concat(authenticatedUser.username),
-      content: intl.formatMessage(messages['header.user.menu.profile'])
+      content: intl.formatMessage(messages['header.user.menu.profile']),
+      icon: PersonOutline
     }, {
       type: 'item',
       href: config.ACCOUNT_SETTINGS_URL,
-      content: intl.formatMessage(messages['header.user.menu.account.settings'])
-    }].concat(_toConsumableArray(config.ORDER_HISTORY_URL ? [{
+      content: intl.formatMessage(messages['header.user.menu.account.settings']),
+      icon: Settings
+    }], _toConsumableArray(config.ORDER_HISTORY_URL ? [{
       type: 'item',
       href: config.ORDER_HISTORY_URL,
-      content: intl.formatMessage(messages['header.user.menu.order.history'])
+      content: intl.formatMessage(messages['header.user.menu.order.history']),
+      icon: ReceiptLong
     }] : []), [{
       type: 'item',
       href: config.LOGOUT_URL,
-      content: intl.formatMessage(messages['header.user.menu.logout'])
+      content: intl.formatMessage(messages['header.user.menu.logout']),
+      icon: Logout
     }])
   }];
   var mainMenu = mainMenuItems || defaultMainMenu;
@@ -82,14 +115,10 @@ var Header = function Header(_ref) {
   // WS_CUSTOM: Merge Studio URL into user menu if userMenuItems are provided
   var userMenu = userMenuItems || defaultUserMenu;
   if (userMenuItems && userMenuItems.length > 0) {
-    // Add Studio URL as the first item in the provided user menu
+    // Add Studio URL as the first item in the provided user menu when requested.
     userMenu = [{
       heading: '',
-      items: [{
-        type: 'item',
-        href: getConfig().STUDIO_BASE_URL,
-        content: intl.formatMessage(messages['header.user.menu.studio.home'])
-      }].concat(_toConsumableArray(userMenuItems[0].items))
+      items: [].concat(_toConsumableArray(showStudioLinkInUserMenu ? [studioHomeMenuItem] : []), _toConsumableArray(userMenuItems[0].items))
     }].concat(_toConsumableArray(userMenuItems.slice(1)));
   }
   var loggedOutItems = [{
@@ -104,10 +133,13 @@ var Header = function Header(_ref) {
   var props = {
     logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
-    logoDestination: "".concat(config.LMS_BASE_URL, "/dashboard"),
+    logoDestination: logoDestination || "".concat(config.LMS_BASE_URL, "/dashboard"),
+    desktopBrandSupplement: desktopBrandSupplement,
     loggedIn: authenticatedUser !== null,
-    username: authenticatedUser !== null ? authenticatedUser.username : null,
+    username: authenticatedUser !== null ? userMenuVariant === 'studio' ? authenticatedUser.name || authenticatedUser.username || getDisplayName(authenticatedUser) : getDisplayName(authenticatedUser) : null,
+    userMenuSecondaryLabel: authenticatedUser !== null ? authenticatedUser.email || (authenticatedUser.username && authenticatedUser.username !== authenticatedUser.name ? authenticatedUser.username : null) : null,
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
+    userMenuVariant: userMenuVariant,
     mainMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : mainMenu,
     secondaryMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : secondaryMenu,
     userMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : userMenu,
@@ -126,7 +158,11 @@ var Header = function Header(_ref) {
 Header.defaultProps = {
   mainMenuItems: null,
   secondaryMenuItems: null,
-  userMenuItems: null
+  userMenuItems: null,
+  desktopBrandSupplement: null,
+  logoDestination: null,
+  showStudioLinkInUserMenu: true,
+  userMenuVariant: 'default'
 };
 Header.propTypes = {
   mainMenuItems: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
@@ -137,9 +173,14 @@ Header.propTypes = {
       type: PropTypes.oneOf(['item', 'menu']),
       href: PropTypes.string,
       content: PropTypes.string,
-      isActive: PropTypes.bool
+      isActive: PropTypes.bool,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
     }))
-  }))
+  })),
+  desktopBrandSupplement: PropTypes.node,
+  logoDestination: PropTypes.string,
+  showStudioLinkInUserMenu: PropTypes.bool,
+  userMenuVariant: PropTypes.oneOf(['default', 'studio'])
 };
 export default Header;
 //# sourceMappingURL=Header.js.map

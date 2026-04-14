@@ -11,6 +11,14 @@ import {
 } from '@edx/frontend-platform';
 
 import PropTypes from 'prop-types';
+import {
+  Dashboard,
+  Home,
+  Logout,
+  PersonOutline,
+  ReceiptLong,
+  Settings,
+} from '@openedx/paragon/icons';
 import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot';
 import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
 
@@ -48,7 +56,13 @@ subscribe(APP_CONFIG_INITIALIZED, () => {
  * See the documentation for the structure of user menu item.
  */
 const Header = ({
-  mainMenuItems, secondaryMenuItems, userMenuItems,
+  mainMenuItems,
+  secondaryMenuItems,
+  userMenuItems,
+  desktopBrandSupplement,
+  logoDestination,
+  showStudioLinkInUserMenu,
+  userMenuVariant,
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
   const intl = useIntl();
@@ -57,42 +71,71 @@ const Header = ({
     {
       type: 'item',
       href: `${config.LMS_BASE_URL}/dashboard`,
-      content: intl.formatMessage(messages['header.links.courses']),
+      content: intl.formatMessage(messages['header.links.explore']),
+    },
+    {
+      type: 'item',
+      href: `${config.LMS_BASE_URL}/dashboard`,
+      content: intl.formatMessage(messages['header.links.my.courses']),
     },
   ];
+
+  // Derive a readable display name: "First L." from full name, fallback to username
+  const getDisplayName = (user) => {
+    if (!user) { return null; }
+    const fullName = user.name || '';
+    const parts = fullName.trim().split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) {
+      return `${parts[0]} ${parts[parts.length - 1][0]}.`;
+    }
+    if (parts.length === 1) {
+      return parts[0];
+    }
+    return user.username;
+  };
+
+  const studioHomeMenuItem = {
+    type: 'item',
+    href: getConfig().STUDIO_BASE_URL,
+    content: intl.formatMessage(messages['header.user.menu.studio.home']),
+    icon: Home,
+  };
+
+  const dashboardMenuItem = {
+    type: 'item',
+    href: `${config.LMS_BASE_URL}/dashboard`,
+    content: intl.formatMessage(messages['header.user.menu.dashboard']),
+    icon: Dashboard,
+  };
+
   const defaultUserMenu = authenticatedUser === null ? [] : [{
     heading: '',
     items: [
-      {
-        type: 'item',
-        href: getConfig().STUDIO_BASE_URL,
-        content: intl.formatMessage(messages['header.user.menu.studio.home']),
-      },
-      {
-        type: 'item',
-        href: `${config.LMS_BASE_URL}/dashboard`,
-        content: intl.formatMessage(messages['header.user.menu.dashboard']),
-      },
+      ...(showStudioLinkInUserMenu ? [studioHomeMenuItem] : [dashboardMenuItem]),
       {
         type: 'item',
         href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`,
         content: intl.formatMessage(messages['header.user.menu.profile']),
+        icon: PersonOutline,
       },
       {
         type: 'item',
         href: config.ACCOUNT_SETTINGS_URL,
         content: intl.formatMessage(messages['header.user.menu.account.settings']),
+        icon: Settings,
       },
       // Users should only see Order History if have a ORDER_HISTORY_URL define in the environment.
       ...(config.ORDER_HISTORY_URL ? [{
         type: 'item',
         href: config.ORDER_HISTORY_URL,
         content: intl.formatMessage(messages['header.user.menu.order.history']),
+        icon: ReceiptLong,
       }] : []),
       {
         type: 'item',
         href: config.LOGOUT_URL,
         content: intl.formatMessage(messages['header.user.menu.logout']),
+        icon: Logout,
       },
     ],
   }];
@@ -103,16 +146,12 @@ const Header = ({
   // WS_CUSTOM: Merge Studio URL into user menu if userMenuItems are provided
   let userMenu = userMenuItems || defaultUserMenu;
   if (userMenuItems && userMenuItems.length > 0) {
-    // Add Studio URL as the first item in the provided user menu
+    // Add Studio URL as the first item in the provided user menu when requested.
     userMenu = [
       {
         heading: '',
         items: [
-          {
-            type: 'item',
-            href: getConfig().STUDIO_BASE_URL,
-            content: intl.formatMessage(messages['header.user.menu.studio.home']),
-          },
+          ...(showStudioLinkInUserMenu ? [studioHomeMenuItem] : []),
           ...userMenuItems[0].items,
         ],
       },
@@ -136,10 +175,31 @@ const Header = ({
   const props = {
     logo: config.LOGO_URL,
     logoAltText: config.SITE_NAME,
-    logoDestination: `${config.LMS_BASE_URL}/dashboard`,
+    logoDestination: logoDestination || `${config.LMS_BASE_URL}/dashboard`,
+    desktopBrandSupplement,
     loggedIn: authenticatedUser !== null,
-    username: authenticatedUser !== null ? authenticatedUser.username : null,
+    username: authenticatedUser !== null
+      ? (
+        userMenuVariant === 'studio'
+          ? authenticatedUser.name || authenticatedUser.username || getDisplayName(authenticatedUser)
+          : getDisplayName(authenticatedUser)
+      )
+      : null,
+    userMenuSecondaryLabel: (
+      authenticatedUser !== null
+        ? (
+          authenticatedUser.email
+          || (
+            authenticatedUser.username
+            && authenticatedUser.username !== authenticatedUser.name
+              ? authenticatedUser.username
+              : null
+          )
+        )
+        : null
+    ),
     avatar: authenticatedUser !== null ? authenticatedUser.avatar : null,
+    userMenuVariant,
     mainMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : mainMenu,
     secondaryMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : secondaryMenu,
     userMenu: getConfig().AUTHN_MINIMAL_HEADER ? [] : userMenu,
@@ -162,6 +222,10 @@ Header.defaultProps = {
   mainMenuItems: null,
   secondaryMenuItems: null,
   userMenuItems: null,
+  desktopBrandSupplement: null,
+  logoDestination: null,
+  showStudioLinkInUserMenu: true,
+  userMenuVariant: 'default',
 };
 
 Header.propTypes = {
@@ -180,8 +244,13 @@ Header.propTypes = {
       href: PropTypes.string,
       content: PropTypes.string,
       isActive: PropTypes.bool,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     })),
   })),
+  desktopBrandSupplement: PropTypes.node,
+  logoDestination: PropTypes.string,
+  showStudioLinkInUserMenu: PropTypes.bool,
+  userMenuVariant: PropTypes.oneOf(['default', 'studio']),
 };
 
 export default Header;

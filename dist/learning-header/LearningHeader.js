@@ -10,6 +10,12 @@ import CourseInfoSlot from '../plugin-slots/CourseInfoSlot';
 import { courseInfoDataShape } from './LearningHeaderCourseInfo';
 import messages from './messages';
 import LearningHelpSlot from '../plugin-slots/LearningHelpSlot';
+var getDisplayName = function getDisplayName(user) {
+  if (!user) {
+    return null;
+  }
+  return user.name || user.username || null;
+};
 var LearningHeader = function LearningHeader(_ref) {
   var courseOrg = _ref.courseOrg,
     courseNumber = _ref.courseNumber,
@@ -24,14 +30,14 @@ var LearningHeader = function LearningHeader(_ref) {
     alt: getConfig().SITE_NAME
   });
   return /*#__PURE__*/React.createElement("header", {
-    className: "learning-header"
+    className: "learning-header bg-white border-b border-neutral-100"
   }, /*#__PURE__*/React.createElement("a", {
-    className: "sr-only sr-only-focusable",
+    className: "sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-2 focus:bg-white focus:text-brand",
     href: "#main-content"
   }, intl.formatMessage(messages.skipNavLink)), /*#__PURE__*/React.createElement("div", {
-    className: "container-xl py-2 d-flex align-items-center"
+    className: "max-w-7xl mx-auto px-4 sm:px-6 flex items-center h-14"
   }, headerLogo, /*#__PURE__*/React.createElement("div", {
-    className: "flex-grow-1 course-title-lockup d-flex",
+    className: "flex-1 min-w-0 flex items-center",
     style: {
       lineHeight: 1
     }
@@ -40,7 +46,9 @@ var LearningHeader = function LearningHeader(_ref) {
     courseNumber: courseNumber,
     courseTitle: courseTitle
   })), showUserDropdown && authenticatedUser && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(LearningHelpSlot, null), /*#__PURE__*/React.createElement(AuthenticatedUserDropdown, {
-    username: authenticatedUser.username
+    username: getDisplayName(authenticatedUser),
+    secondaryLabel: authenticatedUser.email || authenticatedUser.username,
+    avatar: authenticatedUser.avatar
   })), showUserDropdown && !authenticatedUser && /*#__PURE__*/React.createElement(AnonymousUserMenu, null)));
 };
 LearningHeader.propTypes = {

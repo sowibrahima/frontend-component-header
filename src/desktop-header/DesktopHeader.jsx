@@ -19,8 +19,6 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 // i18n
 import messages from '../Header.messages';
 
-// Assets
-
 const DesktopHeader = ({
   mainMenu,
   secondaryMenu,
@@ -29,8 +27,11 @@ const DesktopHeader = ({
   logo,
   logoAltText,
   logoDestination,
+  desktopBrandSupplement,
   avatar,
   username,
+  userMenuSecondaryLabel,
+  userMenuVariant,
   loggedIn,
 }) => {
   const intl = useIntl();
@@ -44,12 +45,28 @@ const DesktopHeader = ({
       <MenuTrigger
         tag="button"
         aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
-        className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
+        className="flex items-center bg-transparent border-none cursor-pointer p-0"
       >
-        <DesktopUserMenuToggleSlot avatar={avatar} label={username} />
+        <DesktopUserMenuToggleSlot
+          avatar={avatar}
+          label={username}
+          secondaryLabel={userMenuSecondaryLabel}
+          variant={userMenuVariant}
+        />
       </MenuTrigger>
-      <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
-        <DesktopUserMenuSlot menu={userMenu} />
+      <MenuContent
+        className={[
+          'site-header-desktop__user-menu-content',
+          userMenuVariant === 'studio' ? 'site-header-desktop__user-menu-content--studio' : '',
+        ].filter(Boolean).join(' ')}
+      >
+        <DesktopUserMenuSlot
+          menu={userMenu}
+          avatar={avatar}
+          label={username}
+          secondaryLabel={userMenuSecondaryLabel}
+          variant={userMenuVariant}
+        />
       </MenuContent>
     </Menu>
   );
@@ -57,29 +74,50 @@ const DesktopHeader = ({
   const renderLoggedOutItems = () => <DesktopLoggedOutItemsSlot items={loggedOutItems} />;
 
   const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
-  const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'mw-100' : null;
+  const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'max-w-full' : null;
 
   return (
-    <header className="site-header-desktop">
-      <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
-      <div className={`container-fluid ${logoClasses}`}>
-        <div className="nav-container position-relative d-flex align-items-center">
+    <header className="site-header-desktop bg-white border-b border-neutral-100 sticky top-0 z-40">
+      <a className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-2 focus:bg-white focus:text-brand" href="#main">
+        {intl.formatMessage(messages['header.label.skip.nav'])}
+      </a>
+      <div className={`site-header-desktop__inner max-w-7xl mx-auto px-4 sm:px-6 ${logoClasses || ''}`}>
+        <div className="site-header-desktop__row flex items-center h-14">
           <LogoSlot {...logoProps} />
+          {desktopBrandSupplement ? (
+            <div className="site-header-desktop__brand-supplement">
+              {desktopBrandSupplement}
+            </div>
+          ) : null}
+
+          {/* Main Navigation */}
           <nav
             aria-label={intl.formatMessage(messages['header.label.main.nav'])}
-            className="nav main-nav"
+            className="site-header-desktop__main-nav flex items-center gap-1"
           >
             {renderMainMenu()}
           </nav>
+
+          {/* Spacer */}
+          <div className="flex-1" />
+
+          {/* Right Section */}
           <nav
             aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
-            className="nav secondary-menu-container align-items-center ml-auto"
+            className="site-header-desktop__secondary-nav flex items-center gap-2"
           >
             {loggedIn
               ? (
                 <>
                   {renderSecondaryMenu()}
-                  {renderUserMenu()}
+
+                  {/* Separator */}
+                  <div className="site-header-desktop__separator w-px h-6 bg-neutral-200 mx-1" />
+
+                  {/* User Menu */}
+                  <div className="site-header-desktop__user-menu relative">
+                    {renderUserMenu()}
+                  </div>
                 </>
               ) : renderLoggedOutItems()}
           </nav>
@@ -97,8 +135,11 @@ export const desktopHeaderDataShape = {
   logo: PropTypes.string,
   logoAltText: PropTypes.string,
   logoDestination: PropTypes.string,
+  desktopBrandSupplement: PropTypes.node,
   avatar: PropTypes.string,
   username: PropTypes.string,
+  userMenuSecondaryLabel: PropTypes.string,
+  userMenuVariant: PropTypes.oneOf(['default', 'studio']),
   loggedIn: PropTypes.bool,
 };
 
@@ -110,8 +151,11 @@ DesktopHeader.propTypes = {
   logo: desktopHeaderDataShape.logo,
   logoAltText: desktopHeaderDataShape.logoAltText,
   logoDestination: desktopHeaderDataShape.logoDestination,
+  desktopBrandSupplement: desktopHeaderDataShape.desktopBrandSupplement,
   avatar: desktopHeaderDataShape.avatar,
   username: desktopHeaderDataShape.username,
+  userMenuSecondaryLabel: desktopHeaderDataShape.userMenuSecondaryLabel,
+  userMenuVariant: desktopHeaderDataShape.userMenuVariant,
   loggedIn: desktopHeaderDataShape.loggedIn,
 };
 
@@ -123,8 +167,11 @@ DesktopHeader.defaultProps = {
   logo: null,
   logoAltText: null,
   logoDestination: null,
+  desktopBrandSupplement: null,
   avatar: null,
   username: null,
+  userMenuSecondaryLabel: null,
+  userMenuVariant: 'default',
   loggedIn: false,
 };
 

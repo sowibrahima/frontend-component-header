@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "make build",
+    "build:watch": "bash ./scripts/build-watch.sh",
     "i18n_extract": "fedx-scripts formatjs extract",
     "lint": "fedx-scripts eslint --ext .js --ext .jsx .",
     "lint:fix": "fedx-scripts eslint --fix --ext .js --ext .jsx .",
@@ -36,9 +37,12 @@
     "@edx/frontend-platform": "^8.3.1",
     "@openedx/frontend-build": "^14.3.2",
     "@openedx/paragon": "^23.0.0",
+    "@tailwindcss/cli": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "^16.2.0",
+    "autoprefixer": "^10.4.27",
     "jest": "30.2.0",
     "jest-environment-jsdom": "^30.0.0",
     "prop-types": "15.8.1",
@@ -49,9 +53,11 @@
     "react-test-renderer": "^18.3.1",
     "redux": "4.2.1",
     "redux-saga": "1.4.2",
+    "tailwindcss": "^4.2.1",
     "ts-jest": "^29.4.4"
   },
   "dependencies": {
+    "@edx/frontend-plugin-notifications": "^2.0.8",
     "@fortawesome/fontawesome-svg-core": "6.7.2",
     "@fortawesome/free-brands-svg-icons": "6.7.2",
     "@fortawesome/free-regular-svg-icons": "6.7.2",
@@ -59,12 +65,14 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@openedx/frontend-plugin-framework": "^1.7.0",
     "classnames": "^2.5.1",
+    "lucide-react": "^0.575.0",
     "react-responsive": "8.2.0",
     "react-transition-group": "4.4.5"
   },
   "peerDependencies": {
     "@edx/frontend-platform": "^7.0.0 || ^8.0.0",
     "@openedx/paragon": ">= 22.0.0 < 24.0.0",
+    "lucide-react": "^0.575.0",
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.9.0 || ^17.0.0 || ^18.0.0",

@@ -12,6 +12,8 @@ build:
 	@rm -rf dist/**/*.test.jsx
 	@rm -rf dist/**/__snapshots__
 	@rm -rf dist/__mocks__
+	@# Compile Tailwind CSS — scans dist/*.js for utility classes and outputs compiled CSS
+	npx @tailwindcss/cli -i src/header.css -o dist/header.css --minify
 
 requirements:
 	npm ci

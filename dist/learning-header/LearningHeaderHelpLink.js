@@ -5,7 +5,7 @@ import messages from './messages';
 var LearningHeaderHelpLink = function LearningHeaderHelpLink() {
   var intl = useIntl();
   return /*#__PURE__*/React.createElement("a", {
-    className: "text-gray-700",
+    className: "text-sm text-neutral-500 hover:text-neutral-900 transition-colors",
     href: "".concat(getConfig().SUPPORT_URL)
   }, intl.formatMessage(messages.help));
 };

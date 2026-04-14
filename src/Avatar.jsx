@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { AvatarIcon } from './Icons';
+import { Icon } from '@openedx/paragon';
+import { PersonOutline } from '@openedx/paragon/icons';
 
 const Avatar = ({
   size,
@@ -10,15 +10,15 @@ const Avatar = ({
   className,
 }) => {
   const avatar = src ? (
-    <img className="d-block w-100 h-100" src={src} alt={alt} />
+    <img className="block w-full h-full object-cover" src={src} alt={alt} />
   ) : (
-    <AvatarIcon style={{ width: size, height: size }} role="img" aria-hidden focusable="false" />
+    <Icon src={PersonOutline} className="site-header-avatar__icon w-5 h-5 text-neutral-500" />
   );
 
   return (
     <span
       style={{ height: size, width: size }}
-      className={`avatar overflow-hidden d-inline-flex rounded-circle ${className}`}
+      className={`site-header-avatar inline-flex items-center justify-center overflow-hidden rounded-full bg-neutral-100 border border-neutral-200 ${className || ''}`}
     >
       {avatar}
     </span>

@@ -4,6 +4,10 @@ import MobileHeaderUserMenu, { mobileHeaderUserMenuDataShape } from '../../mobil
 
 const MobileUserMenuSlot = ({
   menu,
+  avatar,
+  label,
+  secondaryLabel,
+  variant,
 }) => (
   <PluginSlot
     id="org.openedx.frontend.layout.header_mobile_user_menu.v1"
@@ -12,7 +16,13 @@ const MobileUserMenuSlot = ({
       mergeProps: true,
     }}
   >
-    <MobileHeaderUserMenu menu={menu} />
+    <MobileHeaderUserMenu
+      menu={menu}
+      avatar={avatar}
+      label={label}
+      secondaryLabel={secondaryLabel}
+      variant={variant}
+    />
   </PluginSlot>
 );
 

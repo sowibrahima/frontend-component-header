@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
-import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
 import MobileUserMenuToggleSlot from '../plugin-slots/MobileUserMenuToggleSlot';
@@ -30,6 +29,8 @@ const MobileHeader = ({
   logoDestination,
   avatar,
   username,
+  userMenuSecondaryLabel,
+  userMenuVariant,
   loggedIn,
   stickyOnMobile,
 }) => {
@@ -37,29 +38,42 @@ const MobileHeader = ({
 
   const renderMainMenu = () => <MobileMainMenuSlot menu={[...mainMenu, ...secondaryMenu]} />;
 
-  const renderUserMenuItems = () => <MobileUserMenuSlot menu={userMenu} />;
+  const renderUserMenuItems = () => (
+    <MobileUserMenuSlot
+      menu={userMenu}
+      avatar={avatar}
+      label={username}
+      secondaryLabel={userMenuSecondaryLabel}
+      variant={userMenuVariant}
+    />
+  );
 
   const renderLoggedOutItems = () => <MobileLoggedOutItemsSlot items={loggedOutItems} />;
 
-  const renderUserMenuToggle = () => <MobileUserMenuToggleSlot avatar={avatar} label={username} />;
+  const renderUserMenuToggle = () => (
+    <MobileUserMenuToggleSlot
+      avatar={avatar}
+      label={username}
+      secondaryLabel={userMenuSecondaryLabel}
+      variant={userMenuVariant}
+    />
+  );
 
   const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
-  const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
-  const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'justify-content-left pl-3' : 'justify-content-center';
+  const stickyClassName = stickyOnMobile ? 'site-header-mobile--sticky' : '';
 
   return (
     <header
       aria-label={intl.formatMessage(messages['header.label.main.header'])}
-      className={`site-header-mobile d-flex justify-content-between align-items-center shadow ${stickyClassName}`}
+      className={`site-header-mobile ${stickyClassName} sticky top-0 z-40`}
     >
       <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
       {mainMenu.length > 0 ? (
-        <div className="w-100 d-flex justify-content-start">
-
-          <Menu className="position-static">
+        <div className="site-header-mobile__section site-header-mobile__section--main-trigger">
+          <Menu className="site-header-mobile__menu site-header-mobile__menu--main">
             <MenuTrigger
               tag="button"
-              className="icon-button"
+              className="icon-button site-header-mobile__icon-button"
               aria-label={intl.formatMessage(messages['header.label.main.menu'])}
               title={intl.formatMessage(messages['header.label.main.menu'])}
             >
@@ -68,28 +82,32 @@ const MobileHeader = ({
             <MenuContent
               tag="nav"
               aria-label={intl.formatMessage(messages['header.label.main.nav'])}
-              className="nav flex-column pin-left pin-right border-top shadow py-2"
+              className="site-header-mobile__panel site-header-mobile__panel--main nav flex-column py-2"
             >
               {renderMainMenu()}
             </MenuContent>
           </Menu>
         </div>
       ) : null}
-      <div className={`w-100 d-flex ${logoClasses}`}>
+      <div className="site-header-mobile__section site-header-mobile__section--brand">
         <LogoSlot {...logoProps} itemType="http://schema.org/Organization" />
       </div>
       {userMenu.length > 0 || loggedOutItems.length > 0 ? (
-        <div className="w-100 d-flex justify-content-end align-items-center">
-          <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
+        <div className="site-header-mobile__section site-header-mobile__section--account">
+          <Menu
+            tag="nav"
+            aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
+            className="site-header-mobile__menu site-header-mobile__menu--user"
+          >
             <MenuTrigger
               tag="button"
-              className="icon-button"
+              className="icon-button site-header-mobile__icon-button"
               aria-label={intl.formatMessage(messages['header.label.account.menu'])}
               title={intl.formatMessage(messages['header.label.account.menu'])}
             >
               {renderUserMenuToggle()}
             </MenuTrigger>
-            <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
+            <MenuContent tag="div" className="site-header-mobile__panel site-header-mobile__panel--user nav flex-column py-2">
               {loggedIn ? renderUserMenuItems() : renderLoggedOutItems()}
             </MenuContent>
           </Menu>
@@ -109,6 +127,8 @@ export const mobileHeaderDataShape = {
   logoDestination: PropTypes.string,
   avatar: PropTypes.string,
   username: PropTypes.string,
+  userMenuSecondaryLabel: PropTypes.string,
+  userMenuVariant: PropTypes.oneOf(['default', 'studio']),
   loggedIn: PropTypes.bool,
   stickyOnMobile: PropTypes.bool,
 };
@@ -123,6 +143,8 @@ MobileHeader.propTypes = {
   logoDestination: mobileHeaderDataShape.logoDestination,
   avatar: mobileHeaderDataShape.avatar,
   username: mobileHeaderDataShape.username,
+  userMenuSecondaryLabel: mobileHeaderDataShape.userMenuSecondaryLabel,
+  userMenuVariant: mobileHeaderDataShape.userMenuVariant,
   loggedIn: mobileHeaderDataShape.loggedIn,
   stickyOnMobile: mobileHeaderDataShape.stickyOnMobile,
 };
@@ -137,6 +159,8 @@ MobileHeader.defaultProps = {
   logoDestination: null,
   avatar: null,
   username: null,
+  userMenuSecondaryLabel: null,
+  userMenuVariant: 'default',
   loggedIn: false,
   stickyOnMobile: true,
 

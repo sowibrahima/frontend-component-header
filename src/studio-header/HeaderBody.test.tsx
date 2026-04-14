@@ -81,13 +81,12 @@ describe('HeaderBody Component', () => {
     expect(mockSearchButtonAction).toHaveBeenCalled();
   });
 
-  it('displays user menu with username and avatar', () => {
+  it('displays user menu avatar without username in the trigger', () => {
     render(<RootWrapper {...defaultProps} />);
 
-    const userMenu = screen.getByText(defaultProps.username);
     const avatarImage = screen.getByAltText(defaultProps.username);
 
-    expect(userMenu).toBeInTheDocument();
+    expect(screen.queryByText(defaultProps.username)).not.toBeInTheDocument();
     expect(avatarImage).toHaveAttribute('src', defaultProps.authenticatedUserAvatar);
   });
 
