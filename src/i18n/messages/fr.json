@@ -1,0 +1,21 @@
+{
+  "header.links.courses": "Cours",
+  "header.links.explore": "Découvrir",
+  "header.links.my.courses": "Mes cours",
+  "header.links.programs": "Programmes",
+  "header.links.content.search": "Découvrir",
+  "header.links.schools": "Écoles et partenaires",
+  "header.user.menu.dashboard": "Tableau de bord",
+  "header.user.menu.profile": "Profil",
+  "header.user.menu.account.settings": "Compte",
+  "header.user.menu.order.history": "Historique des commandes",
+  "header.user.menu.logout": "Déconnexion",
+  "header.user.menu.login": "Connexion",
+  "header.user.menu.register": "Inscription",
+  "header.user.menu.studio.home": "Accueil Studio",
+  "header.menu.dashboard.label": "Tableau de bord",
+  "header.menu.profile.label": "Profil",
+  "header.menu.account.label": "Compte",
+  "header.menu.orderHistory.label": "Historique des commandes",
+  "header.menu.signOut.label": "Déconnexion"
+}

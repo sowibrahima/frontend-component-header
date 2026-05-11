@@ -23,11 +23,13 @@ const iconMap = {
   dates: CalendarToday,
   teams: People,
   discussion: Forum,
+  'course-administration': School,
   'course-stats': PieChart,
   'course-users': People,
   'course-email': Email,
   'course-reports': Article,
   wiki: Article,
+  'live-sessions': School,
   lti_live: School,
 };
 

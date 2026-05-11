@@ -3,72 +3,72 @@ import { defineMessages } from '@edx/frontend-platform/i18n';
 const messages = defineMessages({
   'header.links.courses': {
     id: 'header.links.courses',
-    defaultMessage: 'Cours',
+    defaultMessage: 'Courses',
     description: 'Link to the learner course dashboard',
   },
   'header.links.explore': {
     id: 'header.links.explore',
-    defaultMessage: 'Découvrir',
+    defaultMessage: 'Discover',
     description: 'Explore link in main navigation',
   },
   'header.links.my.courses': {
     id: 'header.links.my.courses',
-    defaultMessage: 'Mes cours',
+    defaultMessage: 'My courses',
     description: 'Link to the learner course dashboard',
   },
   'header.links.programs': {
     id: 'header.links.programs',
-    defaultMessage: 'Programmes',
+    defaultMessage: 'Programs',
     description: 'Link to the learner program dashboard',
   },
   'header.links.content.search': {
     id: 'header.links.content.search',
-    defaultMessage: 'Découvrir',
+    defaultMessage: 'Discover',
     description: 'Link to the content search page',
   },
   'header.links.schools': {
     id: 'header.links.schools',
-    defaultMessage: 'Écoles et partenaires',
+    defaultMessage: 'Schools and partners',
     description: 'Link to the schools and partners landing page',
   },
   'header.user.menu.dashboard': {
     id: 'header.user.menu.dashboard',
-    defaultMessage: 'Tableau de bord',
+    defaultMessage: 'Dashboard',
     description: 'Link to the user dashboard',
   },
   'header.user.menu.profile': {
     id: 'header.user.menu.profile',
-    defaultMessage: 'Profil',
+    defaultMessage: 'Profile',
     description: 'Link to the user profile',
   },
   'header.user.menu.account.settings': {
     id: 'header.user.menu.account.settings',
-    defaultMessage: 'Compte',
+    defaultMessage: 'Account',
     description: 'Link to account settings',
   },
   'header.user.menu.order.history': {
     id: 'header.user.menu.order.history',
-    defaultMessage: 'Historique des commandes',
+    defaultMessage: 'Order history',
     description: 'Link to order history',
   },
   'header.user.menu.logout': {
     id: 'header.user.menu.logout',
-    defaultMessage: 'Déconnexion',
+    defaultMessage: 'Sign out',
     description: 'Logout link',
   },
   'header.user.menu.login': {
     id: 'header.user.menu.login',
-    defaultMessage: 'Connexion',
+    defaultMessage: 'Sign in',
     description: 'Login link',
   },
   'header.user.menu.register': {
     id: 'header.user.menu.register',
-    defaultMessage: 'Inscription',
+    defaultMessage: 'Register',
     description: 'Link to registration',
   },
   'header.user.menu.studio.home': {
     id: 'header.user.menu.studio.home',
-    defaultMessage: 'Accueil Studio',
+    defaultMessage: 'Studio home',
     description: 'Link to the Studio Home',
   },
   'header.label.account.nav': {

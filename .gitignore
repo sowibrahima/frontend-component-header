@@ -9,3 +9,5 @@ module.config.js
 
 .vscode
 src/i18n/messages
+!src/i18n/messages/
+!src/i18n/messages/fr.json
