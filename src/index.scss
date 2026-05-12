@@ -16,6 +16,24 @@
   z-index: var(--wutiskill-header-z-index, 1100);
 }
 
+/* Shared overlay stacking for Paragon/Bootstrap floating UI. MFEs mount
+   dropdowns and popovers in different shells; keep them above sticky tabs
+   and headers instead of fixing each menu one by one. */
+:root {
+  --wutiskill-overlay-z-index: 7002;
+}
+
+.dropdown-menu,
+.pgn__dropdown-menu,
+.pgn__menu,
+.pgn__menu-list,
+.popover,
+.pgn__popover,
+.tooltip,
+.pgn__tooltip {
+  z-index: var(--wutiskill-overlay-z-index, 7002) !important;
+}
+
 .site-header-desktop a,
 .site-header-desktop a:hover,
 .site-header-desktop a:focus-visible,
@@ -310,7 +328,9 @@
   gap: 0;
   min-height: 3rem;
   overflow-x: auto;
-  padding: 0;
+  overflow-y: hidden;
+  padding: 0 1rem 0 0;
+  scroll-padding-inline: 0.75rem;
   scrollbar-width: none;
 }
 
@@ -330,7 +350,7 @@
   font-size: 0.845rem;
   font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   text-decoration: none;
   white-space: nowrap;
   transition: color 0.18s ease;
@@ -419,6 +439,10 @@
 }
 
 @media (max-width: 640px) {
+  .wuti-shared-course-tabs {
+    padding-right: 1.5rem;
+  }
+
   .wuti-shared-course-tabs a {
     margin-right: 1rem;
     font-size: 0.81rem;

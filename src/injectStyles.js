@@ -332,7 +332,9 @@ const HEADER_COURSE_TABS_CSS = `
   gap: 0;
   min-height: 3rem;
   overflow-x: auto;
-  padding: 0;
+  overflow-y: hidden;
+  padding: 0 1rem 0 0;
+  scroll-padding-inline: 0.75rem;
   scrollbar-width: none;
 }
 
@@ -352,7 +354,7 @@ const HEADER_COURSE_TABS_CSS = `
   font-size: 0.845rem;
   font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   text-decoration: none;
   white-space: nowrap;
   transition: color 0.18s ease;
@@ -441,6 +443,10 @@ const HEADER_COURSE_TABS_CSS = `
 }
 
 @media (max-width: 640px) {
+  .wuti-shared-course-tabs {
+    padding-right: 1.5rem;
+  }
+
   .wuti-shared-course-tabs a {
     margin-right: 1rem;
     font-size: 0.81rem;
@@ -1537,6 +1543,23 @@ const HEADER_STICKY_CSS = `
 }
 `;
 
+const HEADER_OVERLAY_CSS = `
+:root {
+  --wutiskill-overlay-z-index: 7002;
+}
+
+.dropdown-menu,
+.pgn__dropdown-menu,
+.pgn__menu,
+.pgn__menu-list,
+.popover,
+.pgn__popover,
+.tooltip,
+.pgn__tooltip {
+  z-index: var(--wutiskill-overlay-z-index, 7002) !important;
+}
+`;
+
 export function injectHeaderStyles() {
   if (
     typeof document === 'undefined'
@@ -1544,7 +1567,7 @@ export function injectHeaderStyles() {
   ) {
     return;
   }
-  const css = `${HEADER_CSS}\n${HEADER_BOOTSTRAP_COMPAT_CSS}\n${HEADER_COURSE_TABS_CSS}\n${HEADER_MOBILE_CSS}\n${HEADER_NOTIFICATIONS_CSS}\n${HEADER_STICKY_CSS}`;
+  const css = `${HEADER_CSS}\n${HEADER_BOOTSTRAP_COMPAT_CSS}\n${HEADER_COURSE_TABS_CSS}\n${HEADER_MOBILE_CSS}\n${HEADER_NOTIFICATIONS_CSS}\n${HEADER_STICKY_CSS}\n${HEADER_OVERLAY_CSS}`;
   let style = document.querySelector('style[data-header-tailwind="true"]');
 
   if (!style) {

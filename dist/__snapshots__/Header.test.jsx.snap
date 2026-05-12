@@ -78,7 +78,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
           href="http://localhost:18000/dashboard"
           onClick={null}
         >
-          Découvrir
+          Discover
         </a>
         <a
           className="
@@ -91,7 +91,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
           href="http://localhost:18000/dashboard"
           onClick={null}
         >
-          Mes cours
+          My courses
         </a>
       </nav>
       <div
@@ -105,13 +105,13 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
           className="text-sm font-medium text-neutral-700 hover:text-neutral-900 px-3 py-2 transition-colors"
           href="http://localhost:18000/login"
         >
-          Connexion
+          Sign in
         </a>
         <a
           className="text-sm font-semibold text-white bg-brand px-5 py-2 rounded-full hover:bg-brand/90 transition-colors"
           href="http://localhost:18000/register"
         >
-          Inscription
+          Register
         </a>
       </nav>
     </div>
@@ -393,7 +393,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
           href="http://localhost:18000/dashboard"
           onClick={null}
         >
-          Découvrir
+          Discover
         </a>
         <a
           className="
@@ -406,7 +406,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
           href="http://localhost:18000/dashboard"
           onClick={null}
         >
-          Mes cours
+          My courses
         </a>
       </nav>
       <div
