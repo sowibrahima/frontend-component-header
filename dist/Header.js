@@ -50,7 +50,7 @@ var Header = function Header(_ref) {
   var intl = useIntl();
   var defaultMainMenu = [{
     type: 'item',
-    href: "".concat(config.LMS_BASE_URL, "/dashboard"),
+    href: "".concat(config.CATALOG_BASE_URL || config.LMS_BASE_URL, "/courses"),
     content: intl.formatMessage(messages['header.links.explore'])
   }, {
     type: 'item',

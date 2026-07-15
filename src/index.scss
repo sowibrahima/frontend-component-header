@@ -43,6 +43,23 @@
   text-decoration: none;
 }
 
+/* Consuming MFEs must not leak their default Bootstrap link blue into the
+   shared navigation. Identity/navigation use the semantic brand tokens. */
+.site-header-desktop__main-nav a,
+.site-header-desktop__secondary-nav a,
+.site-header-mobile__panel--main a {
+  color: var(--wuti-color-text);
+}
+
+.site-header-desktop__main-nav a:hover,
+.site-header-desktop__main-nav a[aria-current='page'],
+.site-header-desktop__secondary-nav a:hover,
+.site-header-desktop__secondary-nav a[aria-current='page'],
+.site-header-mobile__panel--main a:hover,
+.site-header-mobile__panel--main a[aria-current='page'] {
+  color: var(--wuti-color-brand);
+}
+
 .site-header-desktop :is(button, a, [role='button'], [tabindex]):focus:not(:focus-visible),
 .site-header-mobile :is(button, a, [role='button'], [tabindex]):focus:not(:focus-visible) {
   outline: none;

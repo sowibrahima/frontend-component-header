@@ -19,6 +19,21 @@ const HEADER_BOOTSTRAP_COMPAT_CSS = `
   text-decoration: none;
 }
 
+.site-header-desktop__main-nav a,
+.site-header-desktop__secondary-nav a,
+.site-header-mobile__panel--main a {
+  color: var(--wuti-color-text, var(--color-neutral-700)) !important;
+}
+
+.site-header-desktop__main-nav a:hover,
+.site-header-desktop__main-nav a[aria-current='page'],
+.site-header-desktop__secondary-nav a:hover,
+.site-header-desktop__secondary-nav a[aria-current='page'],
+.site-header-mobile__panel--main a:hover,
+.site-header-mobile__panel--main a[aria-current='page'] {
+  color: var(--wuti-color-brand, var(--color-brand)) !important;
+}
+
 .site-header-desktop :is(button, a, [role='button'], [tabindex]):focus:not(:focus-visible),
 .site-header-mobile :is(button, a, [role='button'], [tabindex]):focus:not(:focus-visible) {
   outline: none;
@@ -828,6 +843,9 @@ const HEADER_NOTIFICATIONS_CSS = `
 }
 
 .pgn__pageBanner-component {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
   border: 1px solid var(--wutiskill-notice-border-info) !important;
   border-radius: calc(var(--wutiskill-notice-radius) + 0.125rem) !important;
   box-shadow: none !important;
@@ -854,14 +872,19 @@ const HEADER_NOTIFICATIONS_CSS = `
 }
 
 .pgn__pageBanner-content {
-  align-items: flex-start !important;
+  display: flex !important;
+  min-width: 0;
+  align-items: center !important;
   gap: 0.75rem;
   padding: 1rem 1.125rem !important;
 }
 
 .pgn__pageBanner-dismissButtonContainer {
-  margin: 0.75rem 0.75rem 0 0 !important;
-  align-self: flex-start;
+  position: static !important;
+  display: flex !important;
+  align-items: center;
+  align-self: center;
+  margin: 0 0.75rem 0 0 !important;
 }
 
 .toast-container {
@@ -1004,6 +1027,7 @@ const HEADER_NOTIFICATIONS_CSS = `
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 }
 
 #notificationIcon .plus-icon {
@@ -1011,33 +1035,54 @@ const HEADER_NOTIFICATIONS_CSS = `
 }
 
 #notificationIcon .notification-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0;
+  border: 0;
   border-radius: 9999px;
+  line-height: 1;
 }
 
-#notificationIcon .notification-button:focus,
-#notificationIcon .notification-button:active {
-  box-shadow: inset 0 0 0 2px var(--pgn-color-primary-500, #590d22) !important;
+#notificationIcon .notification-button:focus-visible {
+  outline: 2px solid var(--wuti-color-focus);
+  outline-offset: 2px;
+  box-shadow: none !important;
 }
 
-#notificationIcon .notification-button:focus,
 #notificationIcon .notification-button:active,
 #notificationIcon .notification-button:hover,
 #notificationIcon .notification-button.btn-icon-light-active {
-  background-color: var(--pgn-color-light-300, #f3f4f6) !important;
+  background-color: var(--wuti-color-surface-subtle) !important;
 }
 
 #notificationIcon .notification-button span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
   margin: 0 !important;
 }
 
 #notificationIcon .notification-lg-bell-icon {
-  width: 56px !important;
-  height: 56px !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
 }
 
 #notificationIcon .notification-lg-bell-icon span:first-child {
-  width: 32px !important;
-  height: 32px !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
+#notificationIcon .notification-button svg {
+  display: block;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
 }
 
 #notificationIcon .notification-badge {
@@ -1563,7 +1608,7 @@ const HEADER_OVERLAY_CSS = `
 export function injectHeaderStyles() {
   if (
     typeof document === 'undefined'
-    || process.env.NODE_ENV === 'test'
+    || (typeof process !== 'undefined' && process.env?.NODE_ENV === 'test')
   ) {
     return;
   }

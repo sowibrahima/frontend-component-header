@@ -70,7 +70,7 @@ const Header = ({
   const defaultMainMenu = [
     {
       type: 'item',
-      href: `${config.LMS_BASE_URL}/dashboard`,
+      href: `${config.CATALOG_BASE_URL || config.LMS_BASE_URL}/courses`,
       content: intl.formatMessage(messages['header.links.explore']),
     },
     {
