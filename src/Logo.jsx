@@ -19,13 +19,13 @@ const Logo = ({
         width: '32px',
         height: '32px',
         borderRadius: '8px',
-        backgroundColor: '#590D22',
+        backgroundColor: 'var(--wuti-color-brand)',
         flexShrink: 0,
       }}
     >
       <span
         style={{
-          color: '#FFFFFF',
+          color: 'var(--wuti-color-brand-text)',
           fontFamily: 'Inter, sans-serif',
           fontWeight: 800,
           fontSize: '16px',
@@ -42,7 +42,7 @@ const Logo = ({
         fontFamily: 'Inter, sans-serif',
         fontWeight: 700,
         fontSize: '15px',
-        color: '#111827',
+        color: 'var(--wuti-color-text)',
         letterSpacing: '-0.3px',
       }}
     >

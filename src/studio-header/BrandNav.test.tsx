@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { MemoryRouter } from 'react-router-dom';
-
+import { IntlProvider } from 'react-intl';
 import BrandNav from './BrandNav';
 
 const studioBaseUrl = 'https://example.com/';
@@ -10,13 +9,13 @@ const logo = 'logo.png';
 const logoAltText = 'Example Logo';
 
 const RootWrapper = () => (
-  <MemoryRouter>
+  <IntlProvider locale="en">
     <BrandNav
       studioBaseUrl={studioBaseUrl}
       logo={logo}
       logoAltText={logoAltText}
     />
-  </MemoryRouter>
+  </IntlProvider>
 );
 
 describe('BrandNav Component', () => {
@@ -24,11 +23,11 @@ describe('BrandNav Component', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the logo with the correct alt text', () => {
+  it('renders the WutiSkill wordmark without depending on the remote logo image', () => {
     render(<RootWrapper />);
 
-    const img = screen.getByAltText(logoAltText);
-    expect(img).toHaveAttribute('src', logo);
+    expect(screen.getByText('WutiSkill')).toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('displays a link that navigates to studioBaseUrl', () => {

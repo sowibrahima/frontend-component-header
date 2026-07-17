@@ -1,5 +1,6 @@
 import React, { type FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+
+import LogoSlot from '../plugin-slots/LogoSlot';
 
 interface Props {
   studioBaseUrl: string;
@@ -12,13 +13,11 @@ const BrandNav: FunctionComponent<Props> = ({
   logo,
   logoAltText,
 }) => (
-  <Link to={studioBaseUrl}>
-    <img
-      src={logo}
-      alt={logoAltText}
-      className="d-block logo"
-    />
-  </Link>
+  <LogoSlot
+    href={studioBaseUrl}
+    src={logo}
+    alt={logoAltText}
+  />
 );
 
 export default BrandNav;
