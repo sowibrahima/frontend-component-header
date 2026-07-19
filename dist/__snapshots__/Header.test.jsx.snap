@@ -24,7 +24,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
           style={
             {
               "alignItems": "center",
-              "backgroundColor": "#590D22",
+              "backgroundColor": "var(--wuti-color-brand)",
               "borderRadius": "8px",
               "display": "inline-flex",
               "flexShrink": 0,
@@ -37,7 +37,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
           <span
             style={
               {
-                "color": "#FFFFFF",
+                "color": "var(--wuti-color-brand-text)",
                 "fontFamily": "Inter, sans-serif",
                 "fontSize": "16px",
                 "fontWeight": 800,
@@ -52,7 +52,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
         <span
           style={
             {
-              "color": "#111827",
+              "color": "var(--wuti-color-text)",
               "fontFamily": "Inter, sans-serif",
               "fontSize": "15px",
               "fontWeight": 700,
@@ -75,10 +75,10 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
             
             
           "
-          href="http://localhost:18000/dashboard"
+          href="http://localhost:18000/courses"
           onClick={null}
         >
-          Discover
+          Explore
         </a>
         <a
           className="
@@ -91,7 +91,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
           href="http://localhost:18000/dashboard"
           onClick={null}
         >
-          My courses
+          My Courses
         </a>
       </nav>
       <div
@@ -199,7 +199,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "#590D22",
+            "backgroundColor": "var(--wuti-color-brand)",
             "borderRadius": "8px",
             "display": "inline-flex",
             "flexShrink": 0,
@@ -212,7 +212,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
         <span
           style={
             {
-              "color": "#FFFFFF",
+              "color": "var(--wuti-color-brand-text)",
               "fontFamily": "Inter, sans-serif",
               "fontSize": "16px",
               "fontWeight": 800,
@@ -227,7 +227,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
       <span
         style={
           {
-            "color": "#111827",
+            "color": "var(--wuti-color-text)",
             "fontFamily": "Inter, sans-serif",
             "fontSize": "15px",
             "fontWeight": 700,
@@ -339,7 +339,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
           style={
             {
               "alignItems": "center",
-              "backgroundColor": "#590D22",
+              "backgroundColor": "var(--wuti-color-brand)",
               "borderRadius": "8px",
               "display": "inline-flex",
               "flexShrink": 0,
@@ -352,7 +352,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
           <span
             style={
               {
-                "color": "#FFFFFF",
+                "color": "var(--wuti-color-brand-text)",
                 "fontFamily": "Inter, sans-serif",
                 "fontSize": "16px",
                 "fontWeight": 800,
@@ -367,7 +367,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
         <span
           style={
             {
-              "color": "#111827",
+              "color": "var(--wuti-color-text)",
               "fontFamily": "Inter, sans-serif",
               "fontSize": "15px",
               "fontWeight": 700,
@@ -390,10 +390,10 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
             
             
           "
-          href="http://localhost:18000/dashboard"
+          href="http://localhost:18000/courses"
           onClick={null}
         >
-          Discover
+          Explore
         </a>
         <a
           className="
@@ -406,7 +406,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
           href="http://localhost:18000/dashboard"
           onClick={null}
         >
-          My courses
+          My Courses
         </a>
       </nav>
       <div
@@ -576,7 +576,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "#590D22",
+            "backgroundColor": "var(--wuti-color-brand)",
             "borderRadius": "8px",
             "display": "inline-flex",
             "flexShrink": 0,
@@ -589,7 +589,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
         <span
           style={
             {
-              "color": "#FFFFFF",
+              "color": "var(--wuti-color-brand-text)",
               "fontFamily": "Inter, sans-serif",
               "fontSize": "16px",
               "fontWeight": 800,
@@ -604,7 +604,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
       <span
         style={
           {
-            "color": "#111827",
+            "color": "var(--wuti-color-text)",
             "fontFamily": "Inter, sans-serif",
             "fontSize": "15px",
             "fontWeight": 700,
