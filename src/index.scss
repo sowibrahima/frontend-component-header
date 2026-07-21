@@ -101,11 +101,27 @@
 }
 
 .site-header-desktop__row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
   min-height: 3.35rem;
 }
 
+.site-header-desktop__main-nav,
 .site-header-desktop__secondary-nav {
+  display: flex;
+  align-items: center;
+}
+
+.site-header-desktop__secondary-nav {
+  flex-flow: row nowrap;
+  align-self: stretch;
   gap: 0.55rem;
+}
+
+.site-header-desktop__secondary-nav > * {
+  flex: 0 0 auto;
+  align-self: center;
 }
 
 .site-header-desktop__separator {
